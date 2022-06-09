@@ -164,6 +164,11 @@ func Configure(p *config.Provider) {
 		r.References["network_interfaces.subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"default_version",
+			},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_vpc", func(r *config.Resource) {

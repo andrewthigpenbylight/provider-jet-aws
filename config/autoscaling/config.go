@@ -30,6 +30,12 @@ func Configure(p *config.Provider) {
 		r.References["vpc_zone_identifier"] = config.Reference{
 			Type: "github.com/crossplane-contrib/provider-jet-aws/apis/ec2/v1alpha2.Subnet",
 		}
+		r.LateInitializer = config.LateInitializer{
+			// Conflicting configuration arguments: "availability_zones": conflicts with vpc_zone_identifier
+			IgnoredFields: []string{
+				"vpc_zone_identifier",
+			},
+		}
 		r.UseAsync = true
 
 		// Managed by Attachment resource.
