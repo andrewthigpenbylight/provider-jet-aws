@@ -1057,6 +1057,16 @@ func (tr *Route) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("CarrierGatewayID"))
+	opts = append(opts, resource.WithNameFilter("EgressOnlyGatewayID"))
+	opts = append(opts, resource.WithNameFilter("GatewayID"))
+	opts = append(opts, resource.WithNameFilter("InstanceID"))
+	opts = append(opts, resource.WithNameFilter("LocalGatewayID"))
+	opts = append(opts, resource.WithNameFilter("NATGatewayID"))
+	opts = append(opts, resource.WithNameFilter("NetworkInterfaceID"))
+	opts = append(opts, resource.WithNameFilter("TransitGatewayID"))
+	opts = append(opts, resource.WithNameFilter("VPCEndpointID"))
+	opts = append(opts, resource.WithNameFilter("VPCPeeringConnectionID"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

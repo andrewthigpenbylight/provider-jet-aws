@@ -292,6 +292,20 @@ func Configure(p *config.Provider) {
 		r.References["vpc_endpoint_id"] = config.Reference{
 			Type: "VPCEndpoint",
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"carrier_gateway_id",
+				"egress_only_gateway_id",
+				"gateway_id",
+				"instance_id",
+				"local_gateway_id",
+				"nat_gateway_id",
+				"network_interface_id",
+				"transit_gateway_id",
+				"vpc_endpoint_id",
+				"vpc_peering_connection_id",
+			},
+		}
 		r.UseAsync = true
 	})
 
